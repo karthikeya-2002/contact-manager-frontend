@@ -38,9 +38,9 @@ function App() {
     setSearchTerm('');
   };
 
-  const sortedContacts = [...contacts].sort((a, b) =>
-    a.firstName.localeCompare(b.firstName)
-  );
+ const sortedContacts = Array.isArray(contacts)
+  ? [...contacts].sort((a, b) => (a.firstName || '').localeCompare(b.firstName || ''))
+  : [];
 
   const filteredContacts = (searchClicked && searchTerm)
     ? sortedContacts.filter(c =>
